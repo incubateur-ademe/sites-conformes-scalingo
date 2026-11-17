@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# web process: gunicorn on a unix socket, behind nginx (bin/run, written by the nginx buildpack).
+set -euo pipefail
+
+# Scalingo stops a container with SIGTERM: pass it on so gunicorn finishes
+# in-flight requests, instead of both being killed with the shell.
+trap 'kill -TERM $(jobs -p) 2>/dev/null; wait' TERM
+
+gunicorn config.wsgi --bind unix:/tmp/gunicorn.sock --log-file - &
+gunicorn_pid=$!
+
+# nginx binds $PORT at once and the router then sends traffic: wait for gunicorn
+# first, or the first requests get a 502. With preload_app the socket only
+# appears once the app is loaded. If gunicorn dies on boot, fail the boot.
+while [ ! -S /tmp/gunicorn.sock ]; do
+  kill -0 "$gunicorn_pid" 2>/dev/null || exit 1
+  sleep 0.5
+done
+bin/run &
+
+# Exit as soon as one of them dies, so Scalingo restarts the container
+# instead of leaving nginx answering 502.
+wait -n
