@@ -10,14 +10,12 @@
       "value": "latest"
     },
     "ALLOWED_HOSTS": {
-      "description": "Liste des noms de domaine autorisés, séparés par des virgules (noms de domaine uniquement, ex : mon-app.osc-fr1.scalingo.io,mon-site.gouv.fr). Adapter la région si l’app n’est pas déployée sur osc-fr1.",
-      "generator": "template",
-      "template": "%APP%.osc-fr1.scalingo.io"
+      "description": "Liste des noms de domaine autorisés, séparés par des virgules (ex : mon-site.gouv.fr,www.mon-site.gouv.fr). Laisser vide pour utiliser l’adresse Scalingo de l’app ; à renseigner une fois un nom de domaine branché.",
+      "required": false
     },
     "HOST_URL": {
-      "description": "Le nom de domaine principal du site (nom de domaine uniquement, ex : mon-site.gouv.fr). Adapter la région si l’app n’est pas déployée sur osc-fr1. À remplacer par le domaine définitif une fois celui-ci branché.",
-      "generator": "template",
-      "template": "%APP%.osc-fr1.scalingo.io"
+      "description": "Le nom de domaine principal du site, sans protocole (ex : mon-site.gouv.fr). Laisser vide pour utiliser l’adresse Scalingo de l’app ; à renseigner une fois un nom de domaine branché.",
+      "required": false
     },
     "SECRET_KEY": {
       "description": "Clé secrète de Django",
