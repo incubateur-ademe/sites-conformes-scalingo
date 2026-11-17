@@ -53,32 +53,8 @@
       "description": "Active le lien « Mot de passe oublié » sur la page de connexion. À passer à True uniquement si l’envoi d’e-mails est configuré",
       "value": "False"
     },
-    "S3_HOST": {
-      "description": "L’adresse du service S3, sans protocole (ex : s3.eu-west-par.io.cloud.ovh.net). Si renseigné, les médias sont stockés sur S3 au lieu de la base de données",
-      "required": false
-    },
-    "S3_KEY_ID": {
-      "description": "L’identifiant d’accès (access key) du bucket S3",
-      "required": false
-    },
-    "S3_KEY_SECRET": {
-      "description": "La clé secrète d’accès du bucket S3",
-      "required": false
-    },
-    "S3_BUCKET_NAME": {
-      "description": "Le nom du bucket S3 où sont stockés les médias importés par les utilisateurs",
-      "required": false
-    },
-    "S3_BUCKET_REGION": {
-      "description": "La région du bucket S3 (ex : eu-west-par)",
-      "required": false
-    },
-    "S3_LOCATION": {
-      "description": "Le dossier où sont rangés les médias dans le bucket S3. Utiliser une valeur unique (par exemple, le nom de l’app) si le bucket est partagé entre plusieurs sites.",
-      "value": "medias"
-    },
     "SF_USE_DB_STORAGE": {
-      "description": "Stocker les images et documents dans la base de données PostgreSQL, sans service externe. Ignoré dès que S3_HOST est renseigné. Passer à S3 pour les sites à fort trafic ou au-delà de 1 Go de médias",
+      "description": "Stocker les images et documents dans la base de données PostgreSQL, sans service externe. Déconseillé pour les sites à fort trafic ou au-delà de 1 Go de médias",
       "value": "True"
     },
     "SF_NOINDEX": {

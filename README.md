@@ -8,8 +8,9 @@ télécharge la version indiquée par la variable `SITES_CONFORMES_VERSION`.
 
 Le bouton crée l’application, sa base PostgreSQL et ses variables d’environnement.
 Les images et documents sont stockés dans la base de données (`SF_USE_DB_STORAGE=True`) :
-aucun service externe n’est nécessaire pour démarrer. Pour passer sur un stockage S3,
-renseigner les variables `S3_*` : S3 est alors prioritaire.
+aucun service externe n’est nécessaire pour démarrer. Au-delà de 1 Go de médias
+ou pour un site à fort trafic, passer sur un stockage S3 en ajoutant à l’app les
+[variables `S3_*`](https://numerique-gouv.github.io/sites-conformes/deploiement/variables-environnement.html) : S3 est alors prioritaire.
 
 Un nginx est placé devant gunicorn (`servers.conf.erb`, `bin/start`) : il sert les fichiers
 statiques et garde en cache les médias stockés en base, pour ne pas lire PostgreSQL à chaque image.
